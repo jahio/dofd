@@ -19,8 +19,9 @@ RSpec.describe "/", type: :request do
   # adjust the attributes here as well.
   let(:valid_attributes) {
     {
-      body: Faker::Lorem.paragraphs(number: 3).join("\n"),
-      title: Faker::Lorem.words(number: 3).join("\n")
+      body:    Faker::Lorem.paragraphs(number: 3).join("\n"),
+      title:   Faker::Lorem.words(number: 3).join("\n"),
+      summary: Faker::Lorem.sentences(number: 3).join("\n")
     }
   }
 
@@ -81,8 +82,9 @@ RSpec.describe "/", type: :request do
     context "with valid parameters" do
       let(:new_attributes) {
         {
-          body: Faker::Lorem.paragraphs(number: 3).join("\n"),
-          title: Faker::Lorem.words(number: 3).join("\n")
+          body:    Faker::Lorem.paragraphs(number: 3).join("\n"),
+          title:   Faker::Lorem.words(number: 3).join("\n"),
+          summary: Faker::Lorem.sentences(number: 3).join("\n")
         }
       }
 
