@@ -1,0 +1,45 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    container_name: docker-postgres
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-rails-app
+    image: rails-web:latest
+    container_name: rails-web
+    environment:
+      DATABASE_NAME: dodf_dev
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_PORT: 5432
+      DATABASE_HOST: db
+      RAILS_ENV: development
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+  web-nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile-rails-app-nginx
+    image: rails-web-nginx:latest
+    container_name: rails-web-nginx
+    environment:
+      DATABASE_NAME: dodf_dev
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_PORT: 5432
+      DATABASE_HOST: db
+      RAILS_ENV: development
+    ports:
+      - "80:80"
+    depends_on:
+      - db

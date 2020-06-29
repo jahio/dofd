@@ -1,0 +1,24 @@
+FROM ruby:2.7.1-alpine3.12
+
+MAINTAINER bhagyesh.raut@joshsoftware.com
+
+RUN apk add --update bash build-base postgresql-dev tzdata yarn
+
+RUN apk add --update --no-cache \
+libgcc libstdc++ libx11 glib libxrender libxext libintl \
+libcrypto1.1 libssl1.1 \
+ttf-dejavu ttf-droid ttf-freefont ttf-liberation ttf-ubuntu-font-family
+
+RUN gem install rails -v '6.0.3'
+
+
+WORKDIR /app
+ADD railsapp/Gemfile railsapp/Gemfile.lock /app/
+RUN bundle install
+COPY railsapp /app/
+COPY rails-env-file /app/.env
+RUN yarn install --check-files
+
+EXPOSE 3000
+
+CMD [ "bundle", "exec", "rails server -e production -p 3000"]
