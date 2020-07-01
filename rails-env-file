@@ -1,0 +1,6 @@
+DATABASE_NAME=dodf_dev
+DATABASE_USER=postgres
+DATABASE_PASSWORD=mysecretpassword
+DATABASE_PORT=5434
+DATABASE_HOST=localhost
+RAILS_ENV=development
