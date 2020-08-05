@@ -20,7 +20,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Compiling and building'
-                sh 'go build'
+                sh 'cd goapp && go build'
             }
         }
 
@@ -32,7 +32,7 @@ pipeline {
                     echo 'Running linting'
                     sh 'golint .'
                     echo 'Running test'
-                    sh 'cd test && go test -v'
+                    sh 'cd goapp && go test -v'
                 }
             }
         }
