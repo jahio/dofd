@@ -32,7 +32,7 @@ pipeline {
                     echo 'Running linting'
                     sh 'golint .'
                     echo 'Running test'
-                    sh 'cd goapp && go test -v'
+                    sh 'go test -v'
                 }
             }
         }
